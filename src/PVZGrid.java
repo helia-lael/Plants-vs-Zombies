@@ -8,7 +8,8 @@ import javafx.stage.Stage;
 public class PVZGrid extends Application {
     private static final int COLS = 9; // 9 columns (vertical)
     private static final int ROWS = 5; // 5 rows (horizontal)
-    private static final int CELL_SIZE = 80; // pixels
+    private static final int CELL_WIDTH = 92; // pixels
+    private static final int CELL_HEIGHT = 97; // pixels
 
     @Override
     public void start(Stage primaryStage) {
@@ -18,7 +19,7 @@ public class PVZGrid extends Application {
         //create 9x5 grid
         for (int row = 0; row < ROWS; row++) {
             for (int col = 0; col < COLS; col++) {
-                Rectangle cell = new Rectangle(CELL_SIZE, CELL_SIZE);
+                Rectangle cell = new Rectangle(CELL_WIDTH, CELL_HEIGHT);
                 cell.setFill(Color.LIGHTGREEN); // Grass color
                 cell.setStroke(Color.GRAY); // Border color
                 cell.setStrokeWidth(1);
