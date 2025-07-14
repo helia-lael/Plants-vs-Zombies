@@ -1,4 +1,4 @@
-import javax.swing.text.html.ImageView;
+import javafx.scene.image.ImageView;
 
 public class Zombie {
     Cell currentCell;
