@@ -1,3 +1,4 @@
+package src;
 import javafx.scene.image.ImageView;
 
 public abstract class Plant {
@@ -26,6 +27,8 @@ public abstract class Plant {
         this.cooldown = cooldown;
         this.type = type;
     }
+
+
 
     protected Plant(int health, int cost, int cooldown, PlantType type, Cell cell) {
         this(health, cost, cooldown, type);

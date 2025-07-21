@@ -1,3 +1,4 @@
+import javafx.scene.control.Cell;
 import javafx.scene.image.ImageView;
 
 public class Zombie {

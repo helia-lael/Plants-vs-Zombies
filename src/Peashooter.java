@@ -1,6 +1,10 @@
+package src;
+
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.GridPane;
+
+import java.io.InputStream;
 
 public class Peashooter extends Plant {
 
@@ -17,12 +21,29 @@ public class Peashooter extends Plant {
         this.currentCell = cell;
         cell.setPlant(this);
 
-        this.imageView = new ImageView(new Image(getClass().getResourceAsStream("ctebentpipe.png")));
-        imageView.setFitWidth(50);
-        imageView.setFitHeight(50);
-        // Add the imageView to the correct cell in the gridPane
-        GridPane gridPane = cell.getGrid().getPane();
-        gridPane.add(imageView, cell.getColumn(), cell.getRow());
+//        this.imageView = new ImageView(new Image(getClass().getResourceAsStream("src/Textures/Plants And Zobies/Repeater.gif")));
+//        imageView.setFitWidth(50);
+//        imageView.setFitHeight(50);
+//        // Add the imageView to the correct cell in the gridPane
+//        GridPane gridPane = cell.getGrid().getPane();
+//        gridPane.add(imageView, cell.getColumn(), cell.getRow());
+        // Load animated GIF from resources
+        InputStream gifStream = getClass().getResourceAsStream("/Textures/Plants And Zobies/Repeater.gif");
+
+        if (gifStream == null) {
+            System.out.println("GIF file not found!");
+        } else {
+            Image gifImage = new Image(gifStream);
+            ImageView imageView = new ImageView(gifImage);
+
+            imageView.setFitWidth(80);
+            imageView.setFitHeight(80);
+
+            // Add the imageView to the correct cell in the gridPane
+            GridPane gridPane = cell.getGrid().getPane();
+            gridPane.add(imageView, cell.getColumn(), cell.getRow());
+        }
+
     }
 
     @Override
