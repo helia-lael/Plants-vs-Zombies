@@ -1,4 +1,3 @@
-package src;
 import javafx.scene.image.ImageView;
 
 public abstract class Plant {
@@ -28,8 +27,6 @@ public abstract class Plant {
         this.type = type;
     }
 
-
-
     protected Plant(int health, int cost, int cooldown, PlantType type, Cell cell) {
         this(health, cost, cooldown, type);
         this.currentCell = cell;
@@ -50,6 +47,7 @@ public abstract class Plant {
 
     // ===== GETTERS ===== //
 
+    public void setHealth(int health) {this.health = health;}
     public int getHealth() { return health; }
     public int getCost() { return cost; }
     public int getCooldown() { return cooldown; }
