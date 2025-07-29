@@ -1,3 +1,6 @@
+package src;
+
+
 import javafx.application.Platform;
 
 import java.util.Random;

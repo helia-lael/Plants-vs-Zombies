@@ -1,4 +1,9 @@
-public class Cell {
+package src;
+
+
+import javafx.scene.Node;
+
+public class Cell extends Node {
     private boolean isOccupied;
     private Plant plant;
 
@@ -35,5 +40,10 @@ public class Cell {
     public void removePlant() {
         this.plant = null;
         this.isOccupied = false;
+    }
+
+    @Override
+    public Node getStyleableNode() {
+        return super.getStyleableNode();
     }
 }

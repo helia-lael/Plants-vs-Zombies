@@ -1,3 +1,6 @@
+package src;
+
+
 import javafx.animation.TranslateTransition;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;

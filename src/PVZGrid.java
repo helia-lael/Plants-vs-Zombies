@@ -1,3 +1,6 @@
+package src;
+
+
 import javafx.application.Application;
 import javafx.geometry.Rectangle2D;
 import javafx.scene.Scene;
@@ -9,6 +12,7 @@ import javafx.stage.Screen;
 import javafx.stage.Stage;
 
 import java.security.cert.PolicyNode;
+
 public class PVZGrid extends Application{
 
 //    private static final int COLS = 9; // 9 columns (vertical)
@@ -19,6 +23,10 @@ public class PVZGrid extends Application{
 
 //    private GridPane gridPane = new GridPane(); // GridPane to hold the cells
 //    private BorderPane borderPane;
+
+    private Plant.PlantType selectedPlantType = null;
+
+
     static AnchorPane anchorPane;
     private HBox hBox;
 
@@ -35,6 +43,22 @@ public class PVZGrid extends Application{
 
     @Override
     public void start(Stage primaryStage) {
+
+        anchorPane = new AnchorPane();
+//        hBox = new HBox();
+//        hBox.setPrefHeight(200);
+//        hBox.setPrefWidth(600);
+
+
+        HBox plantSelector = new HBox();
+        plantSelector.setSpacing(20);
+        plantSelector.setLayoutX(20);
+        plantSelector.setLayoutY(20);
+        anchorPane.getChildren().add(plantSelector);
+
+
+
+
 //        gridPane.setGridLinesVisible(false); // We'll draw our own borders
 
         //create 9x5 grid
@@ -48,13 +72,36 @@ public class PVZGrid extends Application{
 //                // Add click handler
 //                final int currentRow = row;
 //                final int currentCol = col;
-//                cell.setOnMouseClicked(event -> {
-//                    System.out.printf("Clicked: [Row %d, Col %d]%n", currentRow, currentCol);
-//                    // plant a peashooter on the clicked cell
-//                    Peashooter newPeashooter = new Peashooter(100, 50, 5, Plant.PlantType.PEASHOOTER, 10);
-//                    Cell clickedCell = new Cell(currentCol, currentRow, this);
-//                    newPeashooter.plant(clickedCell);
-//                });
+
+
+        for (int row = 0; row < 5; row++) {
+            for (int col = 0; col < 9; col++) {
+                Cell cell = new Cell(col, row, this);
+
+                // Add click listener here
+                cell.setOnMouseClicked(event -> {
+                    if (selectedPlantType == null) return;
+
+                    switch (selectedPlantType) {
+                        case PEASHOOTER:
+                            Peashooter peashooter = new Peashooter(100, 50, 5, Plant.PlantType.PEASHOOTER, 10);
+                            peashooter.plant(cell);
+                            break;
+
+//                      case REPEATER:
+//                      Repeater repeater = new Repeater( /* constructor args */ clickedCell );
+//                      // repeater.plant(clickedCell); // if needed
+//                      break;
+                        // Add more plants here
+                    }
+
+                    selectedPlantType = null;
+                });
+                anchorPane.getChildren().add(cell); // if Cell is a Node (like Pane, etc.)
+            }
+        }
+
+
 //
 //                //GridPane uses (col, row)
 //                gridPane.add(cell, col, row);
@@ -67,10 +114,7 @@ public class PVZGrid extends Application{
 //        anchorPane.toFront();
 //        Scene scene = new Scene(stackPane, 900, 500);
 //        borderPane = new BorderPane();
-        anchorPane = new AnchorPane();
-        hBox = new HBox();
-        hBox.setPrefHeight(200);
-        hBox.setPrefWidth(600);
+
 
 
         Image bgImage = new Image(getClass().getResourceAsStream("/resources/background4.jpg"));
@@ -133,6 +177,8 @@ public class PVZGrid extends Application{
 //        return this.CELL_HEIGHT;
 //    }
 //    public Pane getPane() { return this.gridPane; }
+
+    public AnchorPane getAnchorPane() {return anchorPane;}
 
 
     // later make this a separate class

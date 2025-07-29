@@ -1,3 +1,6 @@
+package src;
+
+
 public enum ZombieType {
     CONEHEAD,
     IMP,

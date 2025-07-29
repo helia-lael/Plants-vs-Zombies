@@ -1,3 +1,5 @@
+package src;
+
 import javafx.scene.image.ImageView;
 
 public abstract class Plant {
@@ -14,6 +16,7 @@ public abstract class Plant {
 
     public enum PlantType {
         PEASHOOTER,
+        REPEATER,
         SUNFLOWER,
         WALL_NUT,
         CHERRY_BOMB,

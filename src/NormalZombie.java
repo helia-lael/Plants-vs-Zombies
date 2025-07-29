@@ -1,3 +1,5 @@
+package src;
+
 import javafx.scene.image.Image;
 
 public class NormalZombie extends Zombie {
