@@ -77,9 +77,14 @@ public class PVZGrid extends Application{
         for (int row = 0; row < 5; row++) {
             for (int col = 0; col < 9; col++) {
                 Cell cell = new Cell(col, row, this);
+                Pane cellVisual = cell.getVisualRepresentation();
 
-                // Add click listener here
-                cell.setOnMouseClicked(event -> {
+                // Position the cell
+                cellVisual.setLayoutX(col * 100); // Adjust based on your cell size
+                cellVisual.setLayoutY(row * 100);
+
+                // Add click listener
+                cellVisual.setOnMouseClicked(event -> {
                     if (selectedPlantType == null) return;
 
                     switch (selectedPlantType) {
@@ -87,17 +92,12 @@ public class PVZGrid extends Application{
                             Peashooter peashooter = new Peashooter(100, 50, 5, Plant.PlantType.PEASHOOTER, 10);
                             peashooter.plant(cell);
                             break;
-
-//                      case REPEATER:
-//                      Repeater repeater = new Repeater( /* constructor args */ clickedCell );
-//                      // repeater.plant(clickedCell); // if needed
-//                      break;
-                        // Add more plants here
+                        // Other cases...
                     }
-
                     selectedPlantType = null;
                 });
-                anchorPane.getChildren().add(cell); // if Cell is a Node (like Pane, etc.)
+
+                anchorPane.getChildren().add(cellVisual);
             }
         }
 
@@ -117,15 +117,24 @@ public class PVZGrid extends Application{
 
 
 
-        Image bgImage = new Image(getClass().getResourceAsStream("/resources/background4.jpg"));
-        BackgroundImage backgroundImage = new BackgroundImage(
-                bgImage,
-                BackgroundRepeat.NO_REPEAT,
-                BackgroundRepeat.NO_REPEAT,
-                BackgroundPosition.CENTER,
-                new BackgroundSize(1100, 740, false, false, false, false)
-        );
-        anchorPane.setBackground(new Background(backgroundImage));
+        Image bgImage;
+        try {
+            bgImage = new Image(getClass().getResource("/background4.jpg").toString());
+        } catch (Exception e) {
+            System.err.println("Could not load background image: " + e.getMessage());
+
+            bgImage = null;
+        }
+        if (bgImage != null) {
+            BackgroundImage backgroundImage = new BackgroundImage(
+                    bgImage,
+                    BackgroundRepeat.NO_REPEAT,
+                    BackgroundRepeat.NO_REPEAT,
+                    BackgroundPosition.CENTER,
+                    new BackgroundSize(1100, 740, false, false, false, false)
+            );
+            anchorPane.setBackground(new Background(backgroundImage));
+        }
         Scene scene = new Scene(anchorPane, 1113, 770);
 
         primaryStage.setTitle("Plants vs Zombies Grid");

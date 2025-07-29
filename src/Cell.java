@@ -1,15 +1,18 @@
 package src;
 
 
-import javafx.scene.Node;
+import javafx.scene.layout.Pane;
 
-public class Cell extends Node {
+public class Cell {
     private boolean isOccupied;
     private Plant plant;
 
     private int column;
     private int row;
     private PVZGrid grid;  // Reference to parent grid
+    private Pane visualRepresentation;  // Visual representation of the cell
+
+
 
     public Cell(int currentCol, int currentRow, PVZGrid pvzGrid) {
         this.grid = pvzGrid;
@@ -17,6 +20,14 @@ public class Cell extends Node {
         this.row = currentRow;
         this.isOccupied = false;
         this.plant = null;
+
+        // Create a visual representation
+        this.visualRepresentation = new Pane();
+        this.visualRepresentation.setPrefSize(100, 100); // Adjust size as neede
+    }
+
+    public Pane getVisualRepresentation() {
+        return visualRepresentation;
     }
 
     public PVZGrid getGrid() { return grid; }
@@ -42,8 +53,4 @@ public class Cell extends Node {
         this.isOccupied = false;
     }
 
-    @Override
-    public Node getStyleableNode() {
-        return super.getStyleableNode();
-    }
 }
